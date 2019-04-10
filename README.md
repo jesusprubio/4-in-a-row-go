@@ -21,3 +21,5 @@ Run the code.
 go run main.go
 ```
 
+## Win/Mac/Linux binary
+https://github.com/y-hatano-github/4-in-a-row-go/releases
