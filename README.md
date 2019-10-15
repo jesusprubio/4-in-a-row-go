@@ -1,6 +1,8 @@
 # 4-in-a-row-go
 CLI game '4-in-a-row' written in go.
 
+![4inarow](4inarow.gif)
+
 ## What is 4-in-a-row?
 https://en.wikipedia.org/wiki/Four-in-a-row
 
