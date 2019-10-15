@@ -4,9 +4,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/y-hatano-github/4inarow/cpu"
-	"github.com/y-hatano-github/4inarow/game"
-	"github.com/y-hatano-github/4inarow/player"
+	"4-in-a-row-go/cpu"
+	"4-in-a-row-go/game"
+	"4-in-a-row-go/player"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 		for {
 
 			// プレイヤーのターン
-			player.ExecPlayerTunr(b)
+			player.ExecPlayerTurn(b)
 			// 盤描画
 			b.DrawBoard()
 			// チェック

@@ -6,11 +6,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/y-hatano-github/4inarow/game"
+	"4-in-a-row-go/game"
 )
 
-// ExecPlayerTunr プレイヤーの手の入力
-func ExecPlayerTunr(b *game.Board) {
+// ExecPlayerTurn プレイヤーの手の入力
+func ExecPlayerTurn(b *game.Board) {
 	for {
 		fmt.Print("type number 1-9. (type 'q' to quit):")
 		stdin := bufio.NewScanner(os.Stdin)

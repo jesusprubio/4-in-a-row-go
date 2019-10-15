@@ -1,9 +1,8 @@
 package cpu
 
 import (
+	"4-in-a-row-go/game"
 	"math/rand"
-
-	"github.com/y-hatano-github/4inarow/game"
 )
 
 // ExecCPUTurn CPUのターン実行
