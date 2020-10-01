@@ -9,7 +9,7 @@ import (
 	"4-in-a-row-go/game"
 )
 
-// ExecPlayerTurn プレイヤーの手の入力
+// ExecPlayerTurn Player's next move.
 func ExecPlayerTurn(b *game.Board) {
 	for {
 		fmt.Print("type number 1-9. (type 'q' to quit):")

@@ -5,15 +5,15 @@ import (
 	"math/rand"
 )
 
-// ExecCPUTurn CPUのターン実行
+// ExecCPUTurn CPU's next move.
 func ExecCPUTurn(b *game.Board) {
 	x, y, sx := 0, 0, 0
-	// 左右どちらから走査するか
+	// Choose which side to start scanning on, left or right.
 	if rand.Intn(2) == 1 {
 		sx = 6
 	}
 
-	// 勝てる場所を探す
+	// find the place that can win.
 	for x = 0; x < 7; x++ {
 		if b.Height[x] > 9 {
 			continue
@@ -25,7 +25,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 	}
 
-	// 負ける場所を探す
+	// Prevent the player from making four in row.
 	for x = 0; x < 7; x++ {
 		if b.Height[x] > 9 {
 			continue
@@ -37,7 +37,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 	}
 
-	// Playerが三つそろう箇所を抑える
+	// Prevent the player from making three in row.
 	for x = 0; x < 7; x++ {
 		x2 := Abs(sx - x)
 		if b.Height[x2] > 9 {
@@ -45,7 +45,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 		y = 9 - b.Height[x2]
 		if checkCPUCell(x2, y, 3, game.Player, b) {
-			// 次の手で負ける場合は抑えない
+			// Avoiding the losing place of the next move.
 			if IsCPULostNextTurn(x2, y, b) {
 				continue
 			}
@@ -54,7 +54,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 	}
 
-	// CPUが三つそろう箇所を抑える
+	// make three in row.
 	for x = 0; x < 7; x++ {
 		x2 := Abs(sx - x)
 		if b.Height[x2] > 9 {
@@ -62,7 +62,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 		y = 9 - b.Height[x2]
 		if checkCPUCell(x2, y, 3, game.CPU, b) {
-			// 次の手で負ける場合は抑えない
+			// Avoiding the losing place of the next move.
 			if IsCPULostNextTurn(x2, y, b) {
 				continue
 			}
@@ -71,7 +71,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 	}
 
-	// Playerが二つそろう箇所を抑える
+	// Prevent the player from making two in row.
 	for x = 0; x < 7; x++ {
 		x2 := Abs(sx - x)
 		if b.Height[x2] > 9 {
@@ -79,7 +79,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 		y = 9 - b.Height[x2]
 		if checkCPUCell(x2, y, 2, game.Player, b) {
-			// 次の手で負ける場合は抑えない
+			// Avoiding the losing place of the next move.
 			if IsCPULostNextTurn(x2, y, b) {
 				continue
 			}
@@ -88,7 +88,7 @@ func ExecCPUTurn(b *game.Board) {
 		}
 	}
 
-	// CPUが二つそろう箇所を抑える
+	// make two in row.
 	/*
 		for x = 0; x < 7; x++ {
 			x2 := Abs(sx - x)
@@ -97,7 +97,7 @@ func ExecCPUTurn(b *game.Board) {
 			}
 			y = 9 - b.Height[x2]
 			if checkCPUCell(x2, y, 2, game.CPU, b) {
-				// 次の手で負ける場合は抑えない
+				// Avoiding the losing place of the next move.
 				if IsCPULostNextTurn(x2, y, b) {
 					continue
 				}
@@ -106,14 +106,14 @@ func ExecCPUTurn(b *game.Board) {
 			}
 		}*/
 
-	// ランダムに手を置く
+	// random next move.
 	for x = 0; x < 7; x++ {
 		rx := rand.Intn(7)
 		if b.Height[rx] > 9 {
 			continue
 		}
 		y = 9 - b.Height[rx]
-		// 負ける場所にはおかない
+		// Avoiding the losing place of the next move.
 		if IsCPULostNextTurn(rx, y, b) {
 			continue
 		}
@@ -121,7 +121,7 @@ func ExecCPUTurn(b *game.Board) {
 		return
 	}
 
-	// 期待した場所がなければ空いている場所に置く
+	// if there is no place to expectrd, next move is an empty spot.
 	for x = 0; x < 7; x++ {
 		x2 := Abs(sx - x)
 		if b.Height[x2] > 9 {
@@ -132,14 +132,14 @@ func ExecCPUTurn(b *game.Board) {
 	}
 }
 
-// checkCPUCell　CPUの手(期待値)のチェック
+// checkCPUCell　count the row.
 func checkCPUCell(x, y, c int, z game.Char, b *game.Board) bool {
 	cbord := b.Board
 	cbord[y][x] = z
 	return b.CheckCellCount(x, y, c, z, cbord)
 }
 
-// IsCPULostNextTurn 次の手でCPUが負けるか
+// IsCPULostNextTurn Check if the CPU loses on the next move.
 func IsCPULostNextTurn(x, y int, b *game.Board) bool {
 	if b.Height[x] > 8 {
 		return false
@@ -151,7 +151,7 @@ func IsCPULostNextTurn(x, y int, b *game.Board) bool {
 	return b.CheckCellCount(x, y-1, 4, game.Player, cbord)
 }
 
-// Abs 絶対値 mathだとfloatなので
+// Abs
 func Abs(x int) int {
 	if x < 0 {
 		return -x

@@ -10,37 +10,36 @@ import (
 )
 
 func main() {
-	// 乱数
 	rand.Seed(time.Now().UnixNano())
 
 	b := &game.Board{}
 	b.DrawTitle()
 	for {
-		// 初期化
+		// init
 		b.Init()
 		b.DrawBoard()
 		for {
 
-			// プレイヤーのターン
+			// player's turn
 			player.ExecPlayerTurn(b)
-			// 盤描画
+			// draw bord
 			b.DrawBoard()
-			// チェック
+			// check
 			b.Judge()
 			if b.GameStatus != game.Playing {
 				break
 			}
-			// COMのターン
+			// CPU's turn
 			cpu.ExecCPUTurn(b)
-			// 盤描画
+			// draw bord
 			b.DrawBoard()
-			// チェック
+			// check
 			b.Judge()
 			if b.GameStatus != game.Playing {
 				break
 			}
 		}
-		// 終了処理
+		// game end
 		b.EndGame()
 	}
 }

@@ -22,7 +22,7 @@ const (
 // Status 状態制御
 type Status int
 
-// 状態
+// status
 const (
 	Playing Status = iota
 	PlayerWin
@@ -30,7 +30,7 @@ const (
 	Draw
 )
 
-// Board ゲーム盤
+// Board
 type Board struct {
 	// 盤(縦×横 : 10 × 7)
 	Board [10][7]Char
@@ -40,7 +40,7 @@ type Board struct {
 	GameStatus Status
 }
 
-// Init 初期化
+// Init
 func (b *Board) Init() {
 	for i, rows := range b.Board {
 		for j := range rows {
@@ -51,7 +51,7 @@ func (b *Board) Init() {
 	b.GameStatus = Playing
 }
 
-// DrawTitle タイトル描画
+// DrawTitle
 func (b *Board) DrawTitle() {
 	w := ansicolor.NewAnsiColorWriter(os.Stdout)
 	fmt.Println("4 in a row.")
@@ -79,7 +79,7 @@ func (b *Board) DrawTitle() {
 	fmt.Println("")
 }
 
-// EndGame ゲーム終了結果出力
+// EndGame
 func (b *Board) EndGame() {
 	switch b.GameStatus {
 	case PlayerWin:
@@ -109,7 +109,7 @@ func (b *Board) EndGame() {
 	}
 }
 
-// DrawBoard 盤描画
+// DrawBoard
 func (b *Board) DrawBoard() {
 	for _, rows := range b.Board {
 		var a string
@@ -130,7 +130,7 @@ func (b *Board) DrawBoard() {
 	fmt.Println()
 }
 
-// Put コマを置く
+// Put
 func (b *Board) Put(x int, z Char) bool {
 	if b.Height[x] == 10 {
 		fmt.Printf("[%v] not vacant.", x+1)
@@ -142,7 +142,7 @@ func (b *Board) Put(x int, z Char) bool {
 	return true
 }
 
-//Judge 判定
+//Judge
 func (b *Board) Judge() {
 	for y, rows := range b.Board {
 		for x, value := range rows {
@@ -169,7 +169,7 @@ func (b *Board) Judge() {
 	b.GameStatus = Playing
 }
 
-// IsDraw 引き分けチェック
+// IsDraw
 func (b *Board) IsDraw() bool {
 	for _, value := range b.Height {
 		if value < 10 {
@@ -180,14 +180,14 @@ func (b *Board) IsDraw() bool {
 	return true
 }
 
-// CheckCellCount 指定されたキャラのカウントと同数か
+// CheckCellCount
 func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 	cs := ""
 	for i := 0; i < c; i++ {
 		cs += [...]string{"0", "1", "2"}[z]
 	}
 
-	// 縦の判定
+	// column
 	cells := ""
 	for yy := y - (c - 1); yy < y+c; yy++ {
 		if yy > -1 && yy < 10 {
@@ -198,7 +198,7 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		return true
 	}
 
-	// 横の判定
+	// row
 	cells = ""
 	for xx := x - (c - 1); xx < x+c; xx++ {
 		if xx > -1 && xx < 7 {
@@ -209,7 +209,7 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		return true
 	}
 
-	// 右肩下がり斜め
+	// Right shoulder down.
 	cells = ""
 	xx := x - (c - 1)
 	for yy := y - (c - 1); yy < y+c; yy++ {
@@ -222,7 +222,7 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		return true
 	}
 
-	// 右肩上がり斜め
+	// Left shoulder down
 	cells = ""
 	xx = x + (c - 1)
 	for yy := y - (c - 1); yy < y+c; yy++ {
