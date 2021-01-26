@@ -1,4 +1,4 @@
-# 4-in-a-row-go
+# 4-in-a-row-go(Connect Four)
 CLI game '4-in-a-row' written in go.
 
 ![4inarow](4inarow.gif)
