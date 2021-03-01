@@ -9,20 +9,20 @@ import (
 	"github.com/shiena/ansicolor"
 )
 
-// Char 表示キャラクタ制御
+// Char
 type Char int
 
-// 表示キャラクタ
+// Display character
 const (
 	Brank Char = iota
 	Player
 	CPU
 )
 
-// Status 状態制御
+// Status
 type Status int
 
-// status
+// status control
 const (
 	Playing Status = iota
 	PlayerWin
@@ -32,11 +32,11 @@ const (
 
 // Board
 type Board struct {
-	// 盤(縦×横 : 10 × 7)
+	// Board ( 10 * 7)
 	Board [10][7]Char
-	// 盤の埋まっている高さ
+	// Height
 	Height [7]int
-	// ゲーム状態
+	// Game Status
 	GameStatus Status
 }
 
