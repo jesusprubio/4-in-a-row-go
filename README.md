@@ -7,6 +7,8 @@ CLI game '4-in-a-row' written in go.
 https://en.wikipedia.org/wiki/Four-in-a-row
 
 ## How to get and run the code.
+### build version
+go1.12.17
 ### 1st step
 Get the code.
 ```
