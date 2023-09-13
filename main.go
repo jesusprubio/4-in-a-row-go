@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"4-in-a-row-go/cpu"
+	"4-in-a-row-go/ai"
 	"4-in-a-row-go/game"
 	"4-in-a-row-go/player"
 )
@@ -29,8 +29,8 @@ func main() {
 			if b.GameStatus != game.Playing {
 				break
 			}
-			// CPU's turn
-			cpu.ExecCPUTurn(b)
+			// AI's turn
+			ai.ExecCPUTurn(b)
 			// draw bord
 			b.DrawBoard()
 			// check

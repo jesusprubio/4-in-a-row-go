@@ -16,7 +16,7 @@ type Char int
 const (
 	Brank Char = iota
 	Player
-	CPU
+	AI
 )
 
 // Status
@@ -26,7 +26,7 @@ type Status int
 const (
 	Playing Status = iota
 	PlayerWin
-	CPUWin
+	AIWin
 	Draw
 )
 
@@ -54,11 +54,11 @@ func (b *Board) Init() {
 // DrawTitle
 func (b *Board) DrawTitle() {
 	w := ansicolor.NewAnsiColorWriter(os.Stdout)
-	fmt.Println("4 in a row.")
+	fmt.Println("Let's play '4 in a row'.")
 	fmt.Fprint(w, fmt.Sprintf("\x1b[32m%s\x1b[0m", "〇"))
 	fmt.Println(" is your cell.")
 	fmt.Fprint(w, fmt.Sprintf("\x1b[31m%s\x1b[0m", "〇"))
-	fmt.Println(" is cpu's cell.")
+	fmt.Println(" is AI's cell.")
 	for {
 		fmt.Print("type 's' to start(type 'q' to quit):")
 		stdin := bufio.NewScanner(os.Stdin)
@@ -84,8 +84,8 @@ func (b *Board) EndGame() {
 	switch b.GameStatus {
 	case PlayerWin:
 		fmt.Println("Player won!!")
-	case CPUWin:
-		fmt.Println("Player lost..")
+	case AIWin:
+		fmt.Println("AI won.")
 	case Draw:
 		fmt.Println("Draw game.")
 	}
@@ -119,7 +119,7 @@ func (b *Board) DrawBoard() {
 				a += "・"
 			case Player:
 				a += fmt.Sprintf("\x1b[32m%s\x1b[0m", "〇")
-			case CPU:
+			case AI:
 				a += fmt.Sprintf("\x1b[31m%s\x1b[0m", "〇")
 			}
 		}
@@ -154,8 +154,8 @@ func (b *Board) Judge() {
 				case Player:
 					b.GameStatus = PlayerWin
 					return
-				case CPU:
-					b.GameStatus = CPUWin
+				case AI:
+					b.GameStatus = AIWin
 					return
 				}
 			}
