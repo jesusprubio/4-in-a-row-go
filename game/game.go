@@ -55,10 +55,10 @@ func (b *Board) Init() {
 func (b *Board) DrawTitle() {
 	w := ansicolor.NewAnsiColorWriter(os.Stdout)
 	fmt.Println("Let's play '4 in a row'.")
-	fmt.Fprint(w, fmt.Sprintf("\x1b[32m%s\x1b[0m", "〇"))
-	fmt.Println(" is your cell.")
-	fmt.Fprint(w, fmt.Sprintf("\x1b[31m%s\x1b[0m", "〇"))
-	fmt.Println(" is AI's cell.")
+	fmt.Fprint(w, fmt.Sprintf("\x1b[42m%s\x1b[0m", "  "))
+	fmt.Println(" is your piece.")
+	fmt.Fprint(w, fmt.Sprintf("\x1b[41m%s\x1b[0m", "  "))
+	fmt.Println(" is AI's piece.")
 	for {
 		fmt.Print("type 's' to start(type 'q' to quit):")
 		stdin := bufio.NewScanner(os.Stdin)
@@ -111,22 +111,26 @@ func (b *Board) EndGame() {
 
 // DrawBoard
 func (b *Board) DrawBoard() {
+	fmt.Println("+---+---+---+---+---+---+---+")
 	for _, rows := range b.Board {
 		var a string
 		for _, value := range rows {
+			a += "|"
 			switch value {
 			case Brank:
-				a += "・"
+				a += "   "
 			case Player:
-				a += fmt.Sprintf("\x1b[32m%s\x1b[0m", "〇")
+				a += fmt.Sprintf("\x1b[42m%s\x1b[0m", "   ")
 			case AI:
-				a += fmt.Sprintf("\x1b[31m%s\x1b[0m", "〇")
+				a += fmt.Sprintf("\x1b[41m%s\x1b[0m", "   ")
 			}
 		}
+		a += "|"
 		w := ansicolor.NewAnsiColorWriter(os.Stdout)
 		fmt.Fprintln(w, a)
+		fmt.Println("+---+---+---+---+---+---+---+")
 	}
-	fmt.Println("１２３４５６７")
+	fmt.Println("  1   2   3   4   5   6   7")
 	fmt.Println()
 }
 
