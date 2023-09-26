@@ -14,7 +14,7 @@ type Char int
 
 // Display character
 const (
-	Brank Char = iota
+	Blank Char = iota
 	Player
 	AI
 )
@@ -117,7 +117,7 @@ func (b *Board) DrawBoard() {
 		for _, value := range rows {
 			a += "|"
 			switch value {
-			case Brank:
+			case Blank:
 				a += "   "
 			case Player:
 				a += fmt.Sprintf("\x1b[42m%s\x1b[0m", "   ")
