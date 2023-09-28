@@ -39,6 +39,9 @@ func main() {
 				break
 			}
 		}
+		// draw bord
+		b.DrawBoard()
+
 		// game end
 		b.EndGame()
 	}

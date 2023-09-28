@@ -17,6 +17,8 @@ const (
 	Blank Char = iota
 	Player
 	AI
+	PlayerPiece
+	AIPiece
 )
 
 // Status
@@ -123,6 +125,10 @@ func (b *Board) DrawBoard() {
 				a += fmt.Sprintf("\x1b[42m%s\x1b[0m", "   ")
 			case AI:
 				a += fmt.Sprintf("\x1b[41m%s\x1b[0m", "   ")
+			case PlayerPiece:
+				a += fmt.Sprintf("\x1b[42m%s\x1b[0m", " * ")
+			case AIPiece:
+				a += fmt.Sprintf("\x1b[41m%s\x1b[0m", " * ")
 			}
 		}
 		a += "|"
@@ -153,7 +159,7 @@ func (b *Board) Judge() {
 			if value == 0 {
 				continue
 			}
-			if b.CheckCellCount(x, y, 4, value, b.Board) {
+			if b.CheckCellCount(x, y, 4, value, b.Board, true) {
 				switch value {
 				case Player:
 					b.GameStatus = PlayerWin
@@ -185,7 +191,7 @@ func (b *Board) IsDraw() bool {
 }
 
 // CheckCellCount
-func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
+func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char, isMark bool) bool {
 	cs := ""
 	for i := 0; i < c; i++ {
 		cs += [...]string{"0", "1", "2"}[z]
@@ -199,6 +205,12 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		}
 	}
 	if strings.Index(cells, cs) != -1 {
+		if isMark {
+			b.Board[y][x] = z + 2
+			b.Board[y+1][x] = z + 2
+			b.Board[y+2][x] = z + 2
+			b.Board[y+3][x] = z + 2
+		}
 		return true
 	}
 
@@ -210,6 +222,12 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		}
 	}
 	if strings.Index(cells, cs) != -1 {
+		if isMark {
+			b.Board[y][x] = z + 2
+			b.Board[y][x+1] = z + 2
+			b.Board[y][x+2] = z + 2
+			b.Board[y][x+3] = z + 2
+		}
 		return true
 	}
 
@@ -223,6 +241,12 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		xx++
 	}
 	if strings.Index(cells, cs) != -1 {
+		if isMark {
+			b.Board[y][x] = z + 2
+			b.Board[y+1][x+1] = z + 2
+			b.Board[y+2][x+2] = z + 2
+			b.Board[y+3][x+3] = z + 2
+		}
 		return true
 	}
 
@@ -236,6 +260,12 @@ func (b *Board) CheckCellCount(x, y, c int, z Char, board [10][7]Char) bool {
 		xx--
 	}
 	if strings.Index(cells, cs) != -1 {
+		if isMark {
+			b.Board[y][x] = z + 2
+			b.Board[y+1][x-1] = z + 2
+			b.Board[y+2][x-2] = z + 2
+			b.Board[y+3][x-3] = z + 2
+		}
 		return true
 	}
 

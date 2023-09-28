@@ -136,7 +136,7 @@ func ExecCPUTurn(b *game.Board) {
 func checkCPUCell(x, y, c int, z game.Char, b *game.Board) bool {
 	cbord := b.Board
 	cbord[y][x] = z
-	return b.CheckCellCount(x, y, c, z, cbord)
+	return b.CheckCellCount(x, y, c, z, cbord, false)
 }
 
 // IsCPULostNextTurn Check if the CPU loses on the next move.
@@ -148,7 +148,7 @@ func IsCPULostNextTurn(x, y int, b *game.Board) bool {
 	cbord[y][x] = game.AI
 	cbord[y-1][x] = game.Player
 
-	return b.CheckCellCount(x, y-1, 4, game.Player, cbord)
+	return b.CheckCellCount(x, y-1, 4, game.Player, cbord, false)
 }
 
 // Abs
