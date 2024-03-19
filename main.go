@@ -4,9 +4,9 @@ import (
 	"math/rand"
 	"time"
 
-	"4-in-a-row-go/ai"
-	"4-in-a-row-go/game"
-	"4-in-a-row-go/player"
+	"github.com/y-hatano-github/4-in-a-row-go/ai"
+	"github.com/y-hatano-github/4-in-a-row-go/game"
+	"github.com/y-hatano-github/4-in-a-row-go/player"
 )
 
 func main() {
