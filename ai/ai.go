@@ -3,7 +3,7 @@ package ai
 import (
 	"math/rand"
 
-	"github.com/y-hatano-github/4-in-a-row-go/game"
+	"github.com/jesusprubio/4-in-a-row-go/game"
 )
 
 // ExecCPUTurn CPU's next move.

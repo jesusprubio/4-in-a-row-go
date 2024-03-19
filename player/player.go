@@ -6,7 +6,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/y-hatano-github/4-in-a-row-go/game"
+	"github.com/jesusprubio/4-in-a-row-go/game"
 )
 
 // ExecPlayerTurn Player's next move.

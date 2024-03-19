@@ -1,4 +1,4 @@
-module github.com/y-hatano-github/4-in-a-row-go
+module github.com/jesusprubio/4-in-a-row-go
 
 go 1.22
 
